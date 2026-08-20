@@ -12,8 +12,6 @@ mkdir $DATA_DIR/embedding_comparator_results
 
 MODELS=("hyenadna" "dnaberts" "tnf" "dnabert2" "dna2vec")
 
-# python3 $WORKING_DIR/prepare_data.py $WORKING_DIR/embedding_paths.txt
-
 for MODEL in "${MODELS[@]}"; do
           
           /usr/bin/time -v python3 $WORKING_DIR/embedding-comparator/preprocess_data.py \
