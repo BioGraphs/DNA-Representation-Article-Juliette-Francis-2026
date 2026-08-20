@@ -1,0 +1,3 @@
+[submodule "jaccard_distance/embedding-comparator"]
+	path = jaccard_distance/embedding-comparator
+	url = https://github.com/mitvis/embedding-comparator.git
