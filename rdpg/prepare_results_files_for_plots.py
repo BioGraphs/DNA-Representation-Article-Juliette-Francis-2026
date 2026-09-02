@@ -13,7 +13,7 @@ def extract_results(filename, hyperparameter, sequences_group):
 
 def create_datasets_from_comp_pvalues(comp_results_dir, hyperparameter, sequences_group, output_dir):
     all_json_files = glob(os.path.join(comp_results_dir, "*.json"))
-    json_files = [f for f in all_json_files if f'{hyperparameter}_' in os.path.basename(f)]
+    json_files = [f for f in all_json_files if (f'{hyperparameter}_' in os.path.basename(f)) and (f'{sequences_group}_' in os.path.basename(f))]
     comp_results = dict()
     for filepath in json_files:
         filename = os.path.basename(filepath)

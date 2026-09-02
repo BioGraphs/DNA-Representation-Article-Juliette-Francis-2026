@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DATA=bacteria_1
+DATA=bacteria_2
 
 mkdir ./dna_representation_article/jaccard_distance/embedding-comparator/data/${DATA}
 
