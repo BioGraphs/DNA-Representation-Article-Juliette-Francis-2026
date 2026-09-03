@@ -18,7 +18,7 @@ for MODEL in "${MODELS[@]}"; do
             --embeddings_file=$DATA_DIR/embeddings_in_tsv_format/${DATA}_${MODEL}_embedding.tsv \
             --metadata_file=$DATA_DIR/embeddings_in_tsv_format/sequence_id.tsv \
             --outfile=$OUTPUT_DIR/${DATA}_${MODEL}_embedding.json \
-            --max_k=25
+            --max_k=70
 
 done
 
