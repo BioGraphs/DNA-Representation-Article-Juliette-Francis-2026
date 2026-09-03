@@ -8,11 +8,6 @@ conda activate embedding_comparator
 # 2. Set up environment
 
 ```bash
-# git submodule add https://github.com/mitvis/embedding-comparator.git jaccard_distance/embedding-comparator
-# git commit -am 'Add embedding-comparator module'
-# git push
-git clone git@forgemia.inra.fr:holobionts_pepr/workpackage_1/phd_juliette_francis.git
-git submodule update --init --recursive
 pip install -r jaccard_distance/embedding-comparator/requirements.txt
 pip uninstall numpy
 pip install numpy==2.0

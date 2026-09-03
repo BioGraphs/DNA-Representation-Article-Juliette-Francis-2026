@@ -16,7 +16,7 @@ pip install h5py==3.13.0
 
 # 3. Launch the comparison of the DNA representations
 
-Go into the directory that contains the dna_representation_article repository and the Results directory. Do these following commands:
+Go into the working directory that contains the dna_representation_article repository and the Results directory. Do these following commands:
 ```bash
 mkdir ./Results/RDPG
 mkdir ./Results/RDPG/latent_position_matrices

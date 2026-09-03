@@ -5,6 +5,17 @@ Code to reproduce the results presented in "Graph-based comparison of genomic fo
 
 ---
 
+## Set up envirenment 
+
+```
+mkdir wd_dna_representation
+cd wd_dna_representation
+mkdir Results
+git clone git@forge.inrae.fr:holobionts_pepr/workpackage_1/dna_representation_article.git
+git submodule update --init --recursive
+tar -xvzf ./dna_representation_article/Data.tar.gz -C ./
+```
+
 ## Overview
 
 
