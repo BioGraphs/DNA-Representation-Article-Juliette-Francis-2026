@@ -1,4 +1,4 @@
-# [DNA Representation Article]
+# DNA Representation Article
 
 Code to reproduce the results presented in "Graph-based comparison of genomic foundation models]{Graph-based comparison reveals distinct representation spaces across genomic foundation models":
 
@@ -15,7 +15,6 @@ Code to reproduce the results presented in "Graph-based comparison of genomic fo
 ├── jaccard_distance/               # Scripts to compare DNA representations with the Jaccard distance
 ├── plots/               # Notebooks to reproduce figures
 ├── rdpg/               # Scripts to compare DNA representations with the RDPG framework
-├── results/               # Generated output files and figures
 ├── Data.tar.gz               # Data archive
 └── README.md
 ```
