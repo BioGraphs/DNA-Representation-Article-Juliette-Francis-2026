@@ -1,6 +1,6 @@
 # DNA Representation Article
 
-Code to reproduce the results presented in "Graph-based comparison of genomic foundation models]{Graph-based comparison reveals distinct representation spaces across genomic foundation models":
+Code to reproduce the results presented in "Graph-based comparison reveals distinct representation spaces across genomic foundation models":
 
 
 ---
