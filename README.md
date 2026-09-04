@@ -8,7 +8,7 @@ Code to reproduce the results presented in "Graph-based comparison reveals disti
 
 ## 1. Overview
 
-The repository is organized in three sub-directory, jaccard_distance, rdpg and plots. The first two contain all the scripts to compare DNA representations with either the Jaccard distance metric, or the RDPG framework. DNA representation are available in the archive Data.tar.gz in the sub-directory Embeddings. The directory plots contains jupyter notebooks to generate the article figures. The numerotation of the correspoding figure is in the name of the notebook and detailed in the following table:
+The repository is organized in three sub-directory, `jaccard_distance`, `rdpg` and `plots`. The first two contain all the scripts to compare DNA representations with either the Jaccard distance metric, or the RDPG framework. DNA representation are available in the archive `Data.tar.gz` in the sub-directory `Embeddings`. The directory plots contains jupyter notebooks to generate the article figures. The numerotation of the correspoding figure is in the name of the notebook and detailed in the following table:
 
 Before running the notebooks, make sure you have run the comparison pipelines (Jaccard distance and RDPG framework) in their corresponding envirenments, as explained below or in the directories READMEs.
 
@@ -49,7 +49,7 @@ Before running the notebooks, make sure you have run the comparison pipelines (J
 
 ### 2.1 Set up the working directory
 
-The following command lines create a directory containing this Git repository, along with the data directory (uncompressed Data.tar.gz) and a results directory.
+The following command lines create a directory containing this Git repository, along with the data directory (uncompressed `Data.tar.gz`) and a results directory.
 ```
 mkdir wd_dna_representation
 cd wd_dna_representation
@@ -104,16 +104,16 @@ conda activate rdpg
 On a terminal, go into the `wd_dna_representation` directory.
 
 ### 5.1 Prepare data and compute nearest neighbors
-The DNA representations files (.csv in ./Data/Embeddings) contain the DNA sequence, the species and the representation vectors, one sequence representation per line and columns are comma-separated.
+The DNA representations files (`.csv` in `./Data/Embeddings`) contain the DNA sequence, the species and the representation vectors, one sequence representation per line and columns are comma-separated.
 
-The Jaccard distance metric uses Embedding Comparator, a visualisation tool, to compute nearest neighboors. To do so, representation files need to be in a specific format. The representation files should only contain the representations vectors, one representations per line and each dimension tab-separated (.tsv). A metadata file (.tsv) should contain the label of each representations (here it is Seq-i-Spe-j, i being the index of the sequence and j the index of the species), one per line, in the same order as the representation files. The script prepare_data.py do this step:
+The Jaccard distance metric uses [Embedding Comparator](https://github.com/mitvis/embedding-comparator), a visualisation tool, to compute nearest neighboors. To do so, representation files need to be in a specific format. The representation files should only contain the representations vectors, one representations per line and each dimension tab-separated (`.tsv`). A metadata file (`.tsv`) should contain the label of each representations (here it is *Seq-i-Spe-j*, i being the index of the sequence and j the index of the species), one per line, in the same order as the representation files. The script prepare_data.py do this step:
 ```bash
 conda activate representations_comparator
 python3 ./dna_representation_article/jaccard_distance/prepare_data.py ./dna_representation_article/jaccard_distance/embedding_paths.txt
 ```
-embedding_paths.txt is a file containing path to the representations files (.csv) located in ./Data/Embeddings.
+`embedding_paths.txt` is a file containing path to the representations files (`.csv`) located in `./Data/Embeddings`.
 
-Once data is in proper shape run preprocess_data.sh. The program preprocess_data.sh will execute `./dna_representation_article/jaccard_distance/embedding-comparator/preprocess_data.py` for every representation files, this script is from Embedding Comparator tool.
+Once data is in proper shape run `preprocess_data.sh`. The program preprocess_data.sh will execute `./dna_representation_article/jaccard_distance/embedding-comparator/preprocess_data.py` for every representation files, this script is from [Embedding Comparator](https://github.com/mitvis/embedding-comparator) tool.
 The file preprocess_data.py computes the local neighborhoods of each sequence and dimensionality reduction with PCA, t-SNE, and UMAP, and write the output as JSON.
 
 ```bash
