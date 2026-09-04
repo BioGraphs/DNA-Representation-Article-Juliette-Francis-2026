@@ -8,11 +8,11 @@ Code to reproduce the results presented in "Graph-based comparison reveals disti
 
 ## 1. Overview
 
-The repository is organized in three sub-directory, `jaccard_distance`, `rdpg` and `plots`. The first two contain all the scripts to compare DNA representations with either the Jaccard distance metric, or the RDPG framework. DNA representation are available in the archive `Data.tar.gz` in the sub-directory `Embeddings`. The directory `plots` contains jupyter notebooks to generate the article figures. The numerotation of the corresponding figure is in the name of the notebook and detailed in the following table:
+The repository is organized in three sub-directory, `jaccard_distance`, `rdpg` and `plots`. The first two contain all the scripts to compare DNA representations with either the Jaccard distance metric, or the RDPG framework. DNA representation made with TNF (Tetra-Nucleotide Frequency), [dna2vec](https://github.com/pnpnpn/dna2vec), [HyenaDNA](https://github.com/HazyResearch/hyena-dna), [DNABERT-2](https://github.com/MAGICS-LAB/DNABERT_2) and [DNABERT-S](https://github.com/MAGICS-LAB/DNABERT_S) are available in the archive `Data.tar.gz` in the sub-directory `Embeddings`. The directory `plots` contains jupyter notebooks to generate the article figures. The numerotation of the corresponding figure is in the name of the notebook and detailed in the following table:
 
 | Figure(s)      | Notebook                                                        | Description                                       |
 |----------------|------------------------------------------------------------------|----------------------------------------------------|
-| 1              | `taxonomic_tree_figure_1.ipynb`                                  | Taxonomic tree species of the DNA sequences                                     |
+| 1              | `taxonomic_tree_figure_1.ipynb`                                  | Taxonomic tree of DNA sequences species                                      |
 | 2              | `pca_projection_figure_2.ipynb`                                  | PCA projection of the representations                                     |
 | 3, 5, S4       | `methods_distance_matrice_figure_3_and_5_and_S4.ipynb`           | Distance matrices for the representation methods                   |
 | 4, S2          | `jaccard_heatmaps_figure_4_and_S2.ipynb`                         | Heatmaps showing Jaccard distance heatmaps                           |
@@ -22,7 +22,7 @@ The repository is organized in three sub-directory, `jaccard_distance`, `rdpg` a
 | S6             | todo     | todo         | Exploration of the results with various values of neighboors
 
 
-Before running the notebooks, make sure you have run the comparison pipelines (Jaccard distance and RDPG framework) in their corresponding envirenments, as explained below or in the directories READMEs.
+Before running the notebooks, make sure you have run the comparison pipelines (Jaccard distance and RDPG framework) in their corresponding envirenments, as explained below.
 
 **Repository structure:**
 
