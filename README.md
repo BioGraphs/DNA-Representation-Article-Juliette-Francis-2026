@@ -111,6 +111,8 @@ conda activate rdpg
 ./dna_representation_article/rdpg/compare_emb_with_rdpg.sh
 ```
 
+Be aware that `compare_emb_with_rdpg.sh` run the RDPG framework for only one value of k (25), but the results needed for the Figure S6 involve running the script with other values (5, 10, 40, 55, 70). In order to be able to run the `k_value_exploration_figure_S6.ipynb` notebook, you will need to run one k value at a time by changing the value of `K` at the line 4 in `compare_emb_with_rdpg.sh`.
+
 ## 5. Launch the comparison of the DNA representations with the Jaccard distance metric
 
 On a terminal, go into the `wd_dna_representation` directory.
@@ -120,7 +122,7 @@ The DNA representations files (`.csv` in `./Data/Embeddings`) contain the DNA se
 
 The Jaccard distance metric uses [Embedding Comparator](https://github.com/mitvis/embedding-comparator), a visualisation tool, to compute nearest neighboors. To do so, representation files need to be in a specific format. The representation files should only contain the representations vectors, one representations per line and each dimension tab-separated (`.tsv`). A metadata file (`.tsv`) should contain the label of each representations (here it is *Seq-i-Spe-j*, i being the index of the sequence and j the index of the species), one per line, in the same order as the representation files. The script prepare_data.py do this step:
 ```bash
-conda activate representations_comparator
+conda activate embedding_comparator
 python3 ./dna_representation_article/jaccard_distance/prepare_data.py ./dna_representation_article/jaccard_distance/embedding_paths.txt
 ```
 `embedding_paths.txt` is a file containing path to the representations files (`.csv`) located in `./Data/Embeddings`.
@@ -129,7 +131,6 @@ Once data is in proper shape run `preprocess_data.sh`. The program preprocess_da
 The file preprocess_data.py computes the local neighborhoods of each sequence and dimensionality reduction with PCA, t-SNE, and UMAP, and write the output as JSON.
 
 ```bash
-chmod +x ./dna_representation_article/jaccard_distance/preprocess_data.sh
 ./dna_representation_article/jaccard_distance/preprocess_data.sh
 ```
 
@@ -137,6 +138,5 @@ chmod +x ./dna_representation_article/jaccard_distance/preprocess_data.sh
 
 Once nearest neighboors are identified, the Jaccard distance metric can be computed with the following command lines:
 ```bash
-chmod +x ./dna_representation_article/jaccard_distance/jaccard_similarity.sh
 ./dna_representation_article/jaccard_distance/jaccard_similarity.sh
 ```
