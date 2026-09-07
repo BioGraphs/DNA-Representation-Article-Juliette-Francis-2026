@@ -31,6 +31,59 @@ def create_datasets_from_comp_pvalues(comp_results_dir, hyperparameter, sequence
     pd.DataFrame(min_pvalues_dict).to_csv(output_dir + f'/{sequences_group}_p_values_{hyperparameter}.csv', sep=",", index=False, header=True)
     return df
 
+def get_comparison_pvalues(comp_results_dir, hyperparameter, sequences_group):
+    all_json_files = glob(os.path.join(comp_results_dir, "*.json"))
+    json_files = [f for f in all_json_files if f'{hyperparameter}_' in os.path.basename(f)]
+    comp_results = dict()
+    for filepath in json_files:
+        filename = os.path.basename(filepath)
+        m1, m2 = extract_results(filename, hyperparameter, sequences_group)
+        with open(filepath) as json_file:
+            comp_results[(m1, m2)] = json.load(json_file)
+    return comp_results
+
+def format_pvalue_data(results_dict):
+    data = []
+    for (model1, model2), metrics in results_dict.items():
+        pvals = metrics.get("p-values", [])
+        d = metrics.get("d", [])
+        if not pvals:
+            continue
+        pair = f"{min(model1, model2)} & {max(model1, model2)}"
+        direction = f"{model1} → {model2}"
+        mean_pval = np.mean(pvals)
+        std_pval = np.std(pvals)
+        ymin = max(mean_pval - std_pval, 0)
+        ymax = min(mean_pval + std_pval, 1)
+        mean_dist_pval = np.mean([1 - p for p in pvals])
+        seq_id = 1
+        for p in pvals:
+            data.append({
+                "Seq ID": seq_id,
+                "Models compared": pair,
+                "Direction": direction,
+                "p-value": p,
+                "Mean p-value": mean_pval,
+                "Std p-value": std_pval,
+                "ymin": ymin,
+                "ymax": ymax,
+                "Distance p-values": 1 - p,
+                "Mean distance p-values": mean_dist_pval,
+                'd': d,
+                'significant': p < 0.05
+            })
+            seq_id += 1
+
+    df = pd.DataFrame(data)
+    signif_rate = (
+        df.groupby("Models compared")["p-value"]
+        .apply(lambda x: 100 * (x < 0.05).mean())
+        .rename("p-values < 0.05 %")
+    )
+    df = df.merge(signif_rate, on="Models compared")
+
+    return df
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -77,3 +130,6 @@ if __name__ == "__main__":
     evidence_pvalues = -np.log10(pvalues)
     evidence_pvalues = evidence_pvalues.rename(columns=columns_rename_dict)
     evidence_pvalues.to_csv(f'{args.output_dir}/{args.data}_evidence_pvalues_{args.hyperparameter}.tsv', sep="\t", index=False, header=True)
+    comp_results = get_comparison_pvalues(args.comp_results_dir, args.hyperparameter, args.data)
+    df = format_pvalue_data(comp_results)
+    df.to_csv(f'{args.output_dir}/{args.data}_data_for_k_exploration_{args.hyperparameter}.tsv', sep="\t", index=False, header=True)
