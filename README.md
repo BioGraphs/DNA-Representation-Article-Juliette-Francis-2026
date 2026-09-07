@@ -91,7 +91,7 @@ python3 ./dna_representation_article/jaccard_distance/prepare_data.py ./dna_repr
 ```
 `embedding_paths.txt` is a file containing path to the representations files (`.csv`) located in `./Data/Embeddings`.
 
-Once data is in proper shape run `preprocess_data.sh`. The program preprocess_data.sh will execute `./dna_representation_article/jaccard_distance/embedding-comparator/preprocess_data.py` for every representation files, this script is from [Embedding Comparator](https://github.com/mitvis/embedding-comparator) tool.
+Once data is in proper shape runs `preprocess_data.sh`. The program preprocess_data.sh will execute `./dna_representation_article/jaccard_distance/embedding-comparator/preprocess_data.py` for every representation files, this script is from [Embedding Comparator](https://github.com/mitvis/embedding-comparator) tool.
 The file preprocess_data.py computes the local neighborhoods of each sequence and dimensionality reduction with PCA, t-SNE, and UMAP, and write the output as JSON.
 
 ```bash
