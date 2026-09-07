@@ -26,20 +26,19 @@ Before running the notebooks, make sure you have run the comparison pipelines (J
 
 **Repository structure:**
 
-```
+```bash
 .
-├── Data.tar.gz               # Data archive
+├── Data.tar.gz              # Data archive
 ├── install.sh               # Set up packages and directories
 ├── README.md
-├── jaccard_distance               # Scripts to compare DNA representations with the Jaccard distance
-│   ├── README.md
+├── jaccard_distance         # Scripts to compare DNA representations with the Jaccard distance
 │   ├── embedding-comparator
 │   ├── embedding_paths.txt
 │   ├── jaccard_similarity.py
 │   ├── jaccard_similarity.sh
 │   ├── prepare_data.py
 │   └── preprocess_data.sh
-├── plots               # Notebooks to reproduce figures
+├── plots                    # Notebooks to reproduce figures
 │   ├── ani_figure_S1.ipynb
 │   ├── evidence_heatmaps_figure_6_and_S3.ipynb
 │   ├── jaccard_and_rdpg_clusters_confusion_matrix_figure_S5.ipynb
@@ -48,8 +47,7 @@ Before running the notebooks, make sure you have run the comparison pipelines (J
 │   ├── methods_distance_matrice_figure_3_and_5_and_S4.ipynb
 │   ├── pca_projection_figure_2.ipynb
 │   └── taxonomic_tree_figure_1.ipynb
-├── rdpg               # Scripts to compare DNA representations with the RDPG framework
-│   ├── README.md
+├── rdpg                     # Scripts to compare DNA representations with the RDPG framework
 │   ├── compare_emb_with_rdpg.py
 │   ├── compare_emb_with_rdpg.sh
 │   ├── create_h0_distributions.py
@@ -61,13 +59,16 @@ Before running the notebooks, make sure you have run the comparison pipelines (J
 
 ## 2. Set up directories and envirenments 
 
-```
+Please [install conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html) if you do not have it already.
+
+```bash
 git clone https://forge.inrae.fr/holobionts_pepr/workpackage_1/dna_representation_article.git
 git submodule update --init --recursive
 ./install.sh # intalls packages and creates a directory containing this Git repository, along with the data directory (uncompressed `Data.tar.gz`) and a results directory. 
 ```
 
-## 4. Launch the comparison of the DNA representations with the RDPG framework
+
+## . Launch the comparison of the DNA representations with the RDPG framework
 
 On a terminal, go into the `wd_dna_representation` directory and run the following command lines:
 ```bash
@@ -110,7 +111,7 @@ Once nearest neighboors are identified, the Jaccard distance metric can be compu
 ## 6. Analyze results with the notebooks
 
 On a terminal, go into the `wd_dna_representation` directory and run the following command lines:
-```
+```bash
 conda activate plots
 jupyter lab
 ```
