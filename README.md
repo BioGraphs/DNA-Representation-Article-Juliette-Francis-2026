@@ -21,11 +21,7 @@ The repository is organized in three sub-directory, `jaccard_distance`, `rdpg` a
 | S5             | `jaccard_and_rdpg_clusters_confusion_matrix_figure_S5.ipynb`     | Confusion matrix of Jaccard vs RDPG clusters         |
 | S6             | `k_value_exploration_figure_S6.ipynb`                            | Exploration of the results with various values of neighboors |
 
-
-Before running the notebooks, make sure you have run the comparison pipelines (Jaccard distance and RDPG framework) in their corresponding envirenments, as explained below.
-
 **Repository structure:**
-
 ```bash
 .
 ├── Data.tar.gz              # Data archive
@@ -56,6 +52,8 @@ Before running the notebooks, make sure you have run the comparison pipelines (J
 │   └── prepare_results_files_for_plots.py
 ```
 
+Before running the notebooks, make sure you have run the comparison pipelines (Jaccard distance and RDPG framework) in their corresponding envirenments, as explained below.
+
 
 ## 2. Set up directories and envirenments 
 
@@ -64,11 +62,11 @@ Please [install conda](https://docs.conda.io/projects/conda/en/latest/user-guide
 ```bash
 git clone https://forge.inrae.fr/holobionts_pepr/workpackage_1/dna_representation_article.git
 git submodule update --init --recursive
-./install.sh # intalls packages and creates a directory containing this Git repository, along with the data directory (uncompressed `Data.tar.gz`) and a results directory. 
+./install.sh # installs packages and creates a directory containing this Git repository, along with the data directory (uncompressed `Data.tar.gz`) and a results directory. 
 ```
 
 
-## . Launch the comparison of the DNA representations with the RDPG framework
+## 3. Launch the comparison of the DNA representations with the RDPG framework
 
 On a terminal, go into the `wd_dna_representation` directory and run the following command lines:
 ```bash
@@ -79,11 +77,11 @@ conda activate rdpg
 Be aware that `compare_emb_with_rdpg.sh` run the RDPG framework for only one value of k (25), but the results needed for the Figure S6 involve running the script with other values (5, 10, 40, 55, 70). In order to be able to run the `k_value_exploration_figure_S6.ipynb` notebook, you will need to run one k value at a time by changing the value of `K` at the line 4 in `compare_emb_with_rdpg.sh`.
 
 
-## 5. Launch the comparison of the DNA representations with the Jaccard distance metric
+## 4. Launch the comparison of the DNA representations with the Jaccard distance metric
 
 On a terminal, go into the `wd_dna_representation` directory.
 
-### 5.1 Prepare data and compute nearest neighbors
+### 4.1 Prepare data and compute nearest neighbors
 The DNA representations files (`.csv` in `./Data/Embeddings`) contain the DNA sequence, the species and the representation vectors, one sequence representation per line and columns are comma-separated.
 
 The Jaccard distance metric uses [Embedding Comparator](https://github.com/mitvis/embedding-comparator), a visualisation tool, to compute nearest neighboors. To do so, representation files need to be in a specific format. The representation files should only contain the representations vectors, one representations per line and each dimension tab-separated (`.tsv`). A metadata file (`.tsv`) should contain the label of each representations (here it is *Seq-i-Spe-j*, i being the index of the sequence and j the index of the species), one per line, in the same order as the representation files. The script prepare_data.py do this step:
@@ -100,7 +98,7 @@ The file preprocess_data.py computes the local neighborhoods of each sequence an
 ./dna_representation_article/jaccard_distance/preprocess_data.sh
 ```
 
-### 5.2 Run the comparision
+### 4.2 Run the comparision
 
 Once nearest neighboors are identified, the Jaccard distance metric can be computed with the following command lines:
 ```bash
@@ -108,7 +106,7 @@ Once nearest neighboors are identified, the Jaccard distance metric can be compu
 ```
 
 
-## 6. Analyze results with the notebooks
+## 5. Analyze results with the notebooks
 
 On a terminal, go into the `wd_dna_representation` directory and run the following command lines:
 ```bash
