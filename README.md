@@ -19,7 +19,7 @@ The repository is organized in three sub-directory, `jaccard_distance`, `rdpg` a
 | 6, S3          | `evidence_heatmaps_figure_6_and_S3.ipynb`                        | Heatmaps showing evidence of RDPG p-values                                  |
 | S1             | `ani_figure_S1.ipynb`                                            | ANI depending on species representation distances                                          |
 | S5             | `jaccard_and_rdpg_clusters_confusion_matrix_figure_S5.ipynb`     | Confusion matrix of Jaccard vs RDPG clusters         |
-| S6             | todo     | todo         | Exploration of the results with various values of neighboors
+| S6             | `k_value_exploration_figure_S6.ipynb`                            | Exploration of the results with various values of neighboors |
 
 
 Before running the notebooks, make sure you have run the comparison pipelines (Jaccard distance and RDPG framework) in their corresponding envirenments, as explained below.
@@ -29,6 +29,7 @@ Before running the notebooks, make sure you have run the comparison pipelines (J
 ```
 .
 ├── Data.tar.gz               # Data archive
+├── install.sh               # Set up packages and directories
 ├── README.md
 ├── jaccard_distance               # Scripts to compare DNA representations with the Jaccard distance
 │   ├── README.md
@@ -43,6 +44,7 @@ Before running the notebooks, make sure you have run the comparison pipelines (J
 │   ├── evidence_heatmaps_figure_6_and_S3.ipynb
 │   ├── jaccard_and_rdpg_clusters_confusion_matrix_figure_S5.ipynb
 │   ├── jaccard_heatmaps_figure_4_and_S2.ipynb
+│   ├── k_value_exploration_figure_S6.ipynb
 │   ├── methods_distance_matrice_figure_3_and_5_and_S4.ipynb
 │   ├── pca_projection_figure_2.ipynb
 │   └── taxonomic_tree_figure_1.ipynb
@@ -59,48 +61,10 @@ Before running the notebooks, make sure you have run the comparison pipelines (J
 
 ## 2. Set up directories and envirenments 
 
-### 2.1 Set up the working directory
-
-The following command lines create a directory containing this Git repository, along with the data directory (uncompressed `Data.tar.gz`) and a results directory.
 ```
-mkdir wd_dna_representation
-cd wd_dna_representation
-mkdir Results
 git clone https://forge.inrae.fr/holobionts_pepr/workpackage_1/dna_representation_article.git
-tar -xvzf ./dna_representation_article/Data.tar.gz -C ./
-cd dna_representation_article
 git submodule update --init --recursive
-cd ../
-mkdir ./Results/RDPG
-mkdir ./Results/RDPG/latent_position_matrices
-mkdir ./Results/RDPG/omnibus_latent_position_matrices
-mkdir ./Results/RDPG/h0_distributions
-mkdir ./Results/RDPG/embeddings_comparison_results
-mkdir ./Results/Plots
-mkdir ./Results/Jaccard_distance
-```
-
-### 2.2 Set up RDPG framework envirenment
-Please [install conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html) if you do not have it already:
-```
-conda create --name rdpg python=3.12
-conda activate rdpg
-pip install graspologic==3.4.1
-pip install future==1.0.0
-pip install torch==2.6.0
-pip install h5py==3.13.0
-conda deactivate
-```
-
-### 2.3 Set up Jaccard distance metric envirenment
-```
-conda create --name embedding_comparator python=3.12
-conda activate embedding_comparator
-pip install -r ./dna_representation/jaccard_distance/embedding-comparator/requirements.txt
-pip uninstall numpy
-pip install numpy==2.0
-pip install pandas
-conda deactivate
+./install.sh # intalls packages and creates a directory containing this Git repository, along with the data directory (uncompressed `Data.tar.gz`) and a results directory. 
 ```
 
 ## 4. Launch the comparison of the DNA representations with the RDPG framework
@@ -112,6 +76,7 @@ conda activate rdpg
 ```
 
 Be aware that `compare_emb_with_rdpg.sh` run the RDPG framework for only one value of k (25), but the results needed for the Figure S6 involve running the script with other values (5, 10, 40, 55, 70). In order to be able to run the `k_value_exploration_figure_S6.ipynb` notebook, you will need to run one k value at a time by changing the value of `K` at the line 4 in `compare_emb_with_rdpg.sh`.
+
 
 ## 5. Launch the comparison of the DNA representations with the Jaccard distance metric
 
@@ -139,4 +104,13 @@ The file preprocess_data.py computes the local neighborhoods of each sequence an
 Once nearest neighboors are identified, the Jaccard distance metric can be computed with the following command lines:
 ```bash
 ./dna_representation_article/jaccard_distance/jaccard_similarity.sh
+```
+
+
+## 6. Analyze results with the notebooks
+
+On a terminal, go into the `wd_dna_representation` directory and run the following command lines:
+```
+conda activate plots
+jupyter lab
 ```
