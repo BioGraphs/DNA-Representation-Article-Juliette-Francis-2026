@@ -14,9 +14,9 @@ The repository is organized in three sub-directory, `jaccard_distance`, `rdpg` a
 |----------------|------------------------------------------------------------------|----------------------------------------------------|
 | 1              | `taxonomic_tree_figure_1.ipynb`                                  | Taxonomic tree of DNA sequences species                                      |
 | 2              | `pca_projection_figure_2.ipynb`                                  | PCA projection of the representations                                     |
-| 3, 5, S4       | `methods_distance_matrice_figure_3_and_5_and_S4.ipynb`           | Distance matrices for the representation methods                   |
-| 4, S2          | `jaccard_heatmaps_figure_4_and_S2.ipynb`                         | Heatmaps showing Jaccard distance heatmaps                           |
-| 6, S3          | `evidence_heatmaps_figure_6_and_S3.ipynb`                        | Heatmaps showing evidence of RDPG p-values                                  |
+| 3, 5, S4       | `methods_distance_matrice_figures_3_and_5_and_S4.ipynb`           | Distance matrices for the representation methods                   |
+| 4, S2          | `jaccard_heatmaps_figures_4_and_S2.ipynb`                         | Heatmaps showing Jaccard distance heatmaps                           |
+| 6, S3          | `evidence_heatmaps_figures_6_and_S3.ipynb`                        | Heatmaps showing evidence of RDPG p-values                                  |
 | S1             | `ani_figure_S1.ipynb`                                            | ANI depending on species representation distances                                          |
 | S5             | `jaccard_and_rdpg_clusters_confusion_matrix_figure_S5.ipynb`     | Confusion matrix of Jaccard vs RDPG clusters         |
 | S6             | `k_value_exploration_figure_S6.ipynb`                            | Exploration of the results with various values of neighboors |
@@ -40,11 +40,11 @@ Before running the notebooks, make sure you have run the comparison pipelines (J
 │   └── preprocess_data.sh
 ├── plots                    # Notebooks to reproduce figures
 │   ├── ani_figure_S1.ipynb
-│   ├── evidence_heatmaps_figure_6_and_S3.ipynb
+│   ├── evidence_heatmaps_figures_6_and_S3.ipynb
 │   ├── jaccard_and_rdpg_clusters_confusion_matrix_figure_S5.ipynb
-│   ├── jaccard_heatmaps_figure_4_and_S2.ipynb
+│   ├── jaccard_heatmaps_figures_4_and_S2.ipynb
 │   ├── k_value_exploration_figure_S6.ipynb
-│   ├── methods_distance_matrice_figure_3_and_5_and_S4.ipynb
+│   ├── methods_distance_matrice_figures_3_and_5_and_S4.ipynb
 │   ├── pca_projection_figure_2.ipynb
 │   └── taxonomic_tree_figure_1.ipynb
 ├── rdpg                     # Scripts to compare DNA representations with the RDPG framework
