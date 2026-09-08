@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # RDPG hyperparameters
-K=70
+K=25
 N_BOOSTRAPS=999
 D=0
 DIST=euclidean
@@ -33,7 +33,7 @@ for model in "${MODELS[@]}"; do
 	current_date_time=$(date)
 	echo "Date and time at the begining of the job: $current_date_time"
 	echo "Embedding file used: ${EMBEDDING}_${model}_embedding.csv"
-	/usr/bin/time -v python3 -W ignore $WORKING_DIR/data_kernel_latent_pos.py $EMB $DIST $K $OUTPUT_NAME $D $KNN_METHOD
+	python3 -W ignore $WORKING_DIR/data_kernel_latent_pos.py $EMB $DIST $K $OUTPUT_NAME $D $KNN_METHOD
 	current_date_time=$(date)
 	echo "Date and time at the end of the job: $current_date_time"
 done
@@ -50,7 +50,7 @@ emb_args=$(IFS=,; echo "${emb_list[*]}")
 
 current_date_time=$(date)
 echo "Date and time at the beginning of the job: $current_date_time"
-/usr/bin/time -v python3 -W ignore $WORKING_DIR/omnibus_latent_pos.py $emb_args $K $OMNIBUS_DIR $DIST $D $KNN_METHOD #-m
+python3 -W ignore $WORKING_DIR/omnibus_latent_pos.py $emb_args $K $OMNIBUS_DIR $DIST $D $KNN_METHOD #-m
 current_date_time=$(date)
 echo "Date and time at the end of the job: $current_date_time"
 
@@ -67,7 +67,7 @@ for model in "${MODELS[@]}"; do
 	current_date_time=$(date)
 	echo "Date and time at the begining of the job: $current_date_time"
 	echo "Embedding file used: ${EMBEDDING}_${model}_embedding.csv"
-	/usr/bin/time -v python3 -W ignore $WORKING_DIR/create_h0_distributions.py $EMB $Z $K $N_BOOSTRAPS $OUTPUT_PATH $DIST $OUTPUT_PATH_Z $KNN_METHOD #-m
+	python3 -W ignore $WORKING_DIR/create_h0_distributions.py $EMB $Z $K $N_BOOSTRAPS $OUTPUT_PATH $DIST $OUTPUT_PATH_Z $KNN_METHOD
 	current_date_time=$(date)
 	echo "Date and time at the end of the job: $current_date_time"
 done
@@ -86,7 +86,7 @@ for model1 in "${MODELS[@]}"; do
 
 			current_date_time=$(date)
 			echo "Date and time at the begining of the job: $current_date_time"
-			/usr/bin/time -v python3 -W ignore $WORKING_DIR/compare_emb_with_rdpg.py $Z1 $OMNIBUS $H0_DIST $OUTPUT_FILE
+			python3 -W ignore $WORKING_DIR/compare_emb_with_rdpg.py $Z1 $OMNIBUS $H0_DIST $OUTPUT_FILE
 			current_date_time=$(date)
 			echo "Date and time at the end of the job: $current_date_time"
         fi

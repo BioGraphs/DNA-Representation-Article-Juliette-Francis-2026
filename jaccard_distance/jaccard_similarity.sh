@@ -21,7 +21,7 @@ for k in "${K_VALUES[@]}"; do
             OUTPUT_FILE=${OUTPUT_DIR}/${DATA}_${MODEL1}_${MODEL2}_jaccard_similarity_k-${k}.csv
             current_date_time=$(date)
             echo "Date and time at the beginning of the job: $current_date_time"
-            /usr/bin/time -v python3 $WORKING_DIR/jaccard_similarity.py \
+            python3 $WORKING_DIR/jaccard_similarity.py \
                 $INPUT_FILE1 \
                 $INPUT_FILE2 \
                 $k \

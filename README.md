@@ -64,7 +64,8 @@ git clone https://forge.inrae.fr/holobionts_pepr/workpackage_1/dna_representatio
 cd dna_representation_article
 git submodule update --init --recursive
 chmod +x install.sh
-./install.sh # installs packages and creates a directory containing this Git repository, along with the data directory (uncompressed `Data.tar.gz`) and a results directory. 
+./install.sh # installs packages and creates a directory containing this Git repository, along with the data directory (uncompressed `Data.tar.gz`) and a results directory.
+cd ../ # You are now in the directory wd_dna_representation, which contain the git repository dna_representation_article
 ```
 
 
