@@ -125,14 +125,6 @@ def get_h0_z_distances(A, Z, n_boostraps, save_memory, output_file_z):
             Z_omni, Z_omni_prime = create_ase_omnibus_matrix(A, A_prime, Z.shape[1], save_memory)
             del A_prime
             h0_z_distances.append(np.linalg.norm(Z_omni - Z_omni_prime, axis=1))
-            # d = Z_omni.shape[1]
-            # columns = [f"dim_{j}" for j in range(d)]
-            # df_omni = pd.DataFrame(Z_omni, columns=columns)
-            # df_omni["source"] = "Z_omni"
-            # df_omni_prime = pd.DataFrame(Z_omni_prime, columns=columns)
-            # df_omni_prime["source"] = "Z_omni_prime"
-            # df_combined = pd.concat([df_omni, df_omni_prime], ignore_index=True)
-            # df_combined.to_parquet(f"{output_file_z}_{i+1}.parquet", index=False, engine="pyarrow", compression="snappy")
             del Z_omni
             del Z_omni_prime
             del columns
@@ -149,14 +141,6 @@ def get_h0_z_distances(A, Z, n_boostraps, save_memory, output_file_z):
           directed=False) 
         Z_omni, Z_omni_prime = create_ase_omnibus_matrix(A, A_prime, Z.shape[1], save_memory)
         h0_z_distances.append(np.linalg.norm(Z_omni - Z_omni_prime, axis=1))
-        # d = Z_omni.shape[1]
-        # columns = [f"dim_{j}" for j in range(d)]
-        # df_omni = pd.DataFrame(Z_omni, columns=columns)
-        # df_omni["source"] = "Z_omni"
-        # df_omni_prime = pd.DataFrame(Z_omni_prime, columns=columns)
-        # df_omni_prime["source"] = "Z_omni_prime"
-        # df_combined = pd.concat([df_omni, df_omni_prime], ignore_index=True)
-        # df_combined.to_parquet(f"{output_file_z}_{i+1}.parquet", index=False, engine="pyarrow", compression="snappy")
     return h0_z_distances
 
 

@@ -52,10 +52,10 @@ The repository is organized in three sub-directory, `jaccard_distance`, `rdpg` a
 │   └── prepare_results_files_for_plots.py
 ```
 
-Before running the notebooks, make sure you have run the comparison pipelines (Jaccard distance and RDPG framework) in their corresponding envirenments, as explained below.
+Before running the notebooks, make sure you have run the comparison pipelines (Jaccard distance and RDPG framework) in their corresponding environments, as explained below.
 
 
-## 2. Set up directories and envirenments 
+## 2. Set up directories and environments 
 
 Please [install conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html) if you do not have it already.
 
