@@ -76,7 +76,7 @@ conda activate rdpg
 ./rdpg/compare_emb_with_rdpg.sh
 ```
 
-Be aware that `compare_emb_with_rdpg.sh` run the RDPG framework for only one value of k (25), but the results needed for the Figure S6 involve running the script with other values (5, 10, 40, 55, 70). In order to be able to run the `k_value_exploration_figure_S6.ipynb` notebook, you will need to run one k value at a time by changing the value of `K` at the line 4 in `compare_emb_with_rdpg.sh`.
+Be aware that `compare_emb_with_rdpg.sh` runs the RDPG framework for only one value of k (25), but the results needed for the Figure S6 involve running the script with other values (5, 10, 40, 55, 70). In order to be able to run the `k_value_exploration_figure_S6.ipynb` notebook, you will need to run one k value at a time by changing the value of `K` at the line 4 in `compare_emb_with_rdpg.sh`.
 
 
 ## 4. Launch the comparison of the DNA representations with the Jaccard distance metric
