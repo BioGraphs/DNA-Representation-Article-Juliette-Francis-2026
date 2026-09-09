@@ -30,7 +30,6 @@ import os
 import warnings
 import h5py
 import gc
-# warnings.filterwarnings('ignore')
 from data_kernel_latent_pos import data_kernel
 from omnibus_latent_pos import create_ase_omnibus_matrix
 

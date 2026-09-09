@@ -8,7 +8,7 @@ Code to reproduce the results presented in "Graph-based comparison reveals disti
 
 ## 1. Overview
 
-The repository is organized in three sub-directory, `jaccard_distance`, `rdpg` and `plots`. The first two contain all the scripts to compare DNA representations with either the Jaccard distance metric, or the RDPG framework. DNA representation made with TNF (Tetra-Nucleotide Frequency), [dna2vec](https://github.com/pnpnpn/dna2vec), [HyenaDNA](https://github.com/HazyResearch/hyena-dna), [DNABERT-2](https://github.com/MAGICS-LAB/DNABERT_2) and [DNABERT-S](https://github.com/MAGICS-LAB/DNABERT_S) are available in the archive `Data.tar.gz` in the sub-directory `Embeddings`. The directory `plots` contains jupyter notebooks to generate the article figures. The numerotation of the corresponding figure is in the name of the notebook and detailed in the following table:
+The repository is organized in three sub-directory, `jaccard_distance`, `rdpg` and `plots`. The first two contain all the scripts needed to compare DNA representations with either the Jaccard distance metric, or the RDPG framework. DNA representation made with TNF (Tetra-Nucleotide Frequency), [dna2vec](https://github.com/pnpnpn/dna2vec), [HyenaDNA](https://github.com/HazyResearch/hyena-dna), [DNABERT-2](https://github.com/MAGICS-LAB/DNABERT_2) and [DNABERT-S](https://github.com/MAGICS-LAB/DNABERT_S) are available in the archive `Data.tar.gz` in the sub-directory `Embeddings`. The directory `plots` contains jupyter notebooks to generate the article figures. The numerotation of the corresponding figure is in the name of the notebook and detailed in the following table:
 
 | Figure(s)      | Notebook                                                        | Description                                       |
 |----------------|------------------------------------------------------------------|----------------------------------------------------|
@@ -28,7 +28,7 @@ The repository is organized in three sub-directory, `jaccard_distance`, `rdpg` a
 ├── install.sh               # Set up packages and directories
 ├── README.md
 ├── jaccard_distance         # Scripts to compare DNA representations with the Jaccard distance
-│   ├── embedding-comparator
+│   ├── embedding-comparator # Submodule
 │   ├── embedding_paths.txt
 │   ├── jaccard_similarity.py
 │   ├── jaccard_similarity.sh
@@ -64,13 +64,13 @@ git clone https://forge.inrae.fr/holobionts_pepr/workpackage_1/dna_representatio
 cd dna_representation_article
 git submodule update --init --recursive
 chmod +x install.sh
-./install.sh # installs packages and creates a directory containing this Git repository, along with the data directory (uncompressed `Data.tar.gz`) and a results directory.
+./install.sh # installs packages and creates a directory the data directory (uncompressed `Data.tar.gz`) and a results directory.
 ```
 
 
 ## 3. Launch the comparison of the DNA representations with the RDPG framework
 
-On a terminal, go into the `wd_dna_representation` directory and run the following command lines:
+On a terminal, in this Git repository, run the following command lines:
 ```bash
 conda activate rdpg
 ./rdpg/compare_emb_with_rdpg.sh
@@ -80,8 +80,6 @@ Be aware that `compare_emb_with_rdpg.sh` run the RDPG framework for only one val
 
 
 ## 4. Launch the comparison of the DNA representations with the Jaccard distance metric
-
-On a terminal, go into the `wd_dna_representation` directory.
 
 ### 4.1 Prepare data and compute nearest neighbors
 The DNA representations files (`.csv` in `./Data/Embeddings`) contain the DNA sequence, the species and the representation vectors, one sequence representation per line and columns are comma-separated.
@@ -110,7 +108,7 @@ Once nearest neighboors are identified, the Jaccard distance metric can be compu
 
 ## 5. Analyze results with the notebooks
 
-On a terminal, go into the `wd_dna_representation` directory and run the following command lines:
+On a terminal, in this Git repository, run the following command lines:
 ```bash
 conda activate plots
 jupyter lab

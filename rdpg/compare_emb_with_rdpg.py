@@ -26,7 +26,6 @@ import os
 import warnings
 import h5py
 from create_h0_distributions import compute_p_values
-# warnings.filterwarnings('ignore')
 
 
 def main(latent_pos_path, omnibus_path, h0_z_distance_path, output_file):
