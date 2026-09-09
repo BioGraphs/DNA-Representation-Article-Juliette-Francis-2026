@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DATA=bacteria_1
-WORKING_DIR=./dna_representation_article/jaccard_distance
+WORKING_DIR=./jaccard_distance
 DATA_DIR=./Results/Jaccard_distance/${DATA}/embedding_comparator_results
 OUTPUT_DIR=./Results/Jaccard_distance/${DATA}/jaccard_results
 

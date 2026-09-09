@@ -1,5 +1,5 @@
-./Results/Embeddings/bacteria_1_tnf_embedding.csv
-./Results/Embeddings/bacteria_1_dnaberts_embedding.csv
-./Results/Embeddings/bacteria_1_dna2vec_embedding.csv
-./Results/Embeddings/bacteria_1_hyenadna_embedding.csv
-./Results/Embeddings/bacteria_1_dnabert2_embedding.csv
+./Data/Embeddings/bacteria_1_tnf_embedding.csv
+./Data/Embeddings/bacteria_1_dnaberts_embedding.csv
+./Data/Embeddings/bacteria_1_dna2vec_embedding.csv
+./Data/Embeddings/bacteria_1_hyenadna_embedding.csv
+./Data/Embeddings/bacteria_1_dnabert2_embedding.csv
