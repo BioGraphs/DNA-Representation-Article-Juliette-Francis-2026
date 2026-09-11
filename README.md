@@ -113,3 +113,11 @@ On a terminal, in this Git repository, run the following command lines:
 conda activate plots
 jupyter lab
 ```
+
+You might need to install an IRkernel. To do so, open a terminal in jupyter lab and run:
+```bash
+R
+> install.packages('IRkernel')
+> IRkernel::installspec()
+```
+Then you can open a notebook and choose a R kernel.
