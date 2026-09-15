@@ -4,3 +4,6 @@
 [submodule "representation_methods/dna2vec"]
 	path = representation_methods/dna2vec
 	url = https://github.com/pnpnpn/dna2vec.git
+[submodule "representation_methods/hyenadna/dna_embedding/hyenadna/hyena-dna"]
+	path = representation_methods/hyenadna/dna_embedding/hyenadna/hyena-dna
+	url = https://github.com/HazyResearch/hyena-dna.git
