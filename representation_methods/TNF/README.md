@@ -1,9 +1,10 @@
+This directory contains scripts to use Tetra-Nucleotide Frequency (TNF) on the bacteria_1 dataset.
+
 # 1. Create a virtual environment with desired packages
 
 ```bash
 conda create --name TNF python=3.10 pandas scikit-learn
 conda activate TNF
-pip install pytest
 ```
 
 ## 2. Create the representation
