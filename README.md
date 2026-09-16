@@ -20,6 +20,7 @@ The repository is organized in three sub-directory, `jaccard_distance`, `rdpg` a
 | S1             | `ani_figure_S1.ipynb`                                            | ANI depending on species representation distances                                          |
 | S5             | `jaccard_and_rdpg_clusters_confusion_matrix_figure_S5.ipynb`     | Confusion matrix of Jaccard vs RDPG clusters         |
 | S6             | `k_value_exploration_figure_S6.ipynb`                            | Exploration of the results with various values of neighboors |
+
 **Before running the notebooks, make sure you have run the comparison pipelines (Jaccard distance and RDPG framework) in their corresponding environments, as explained below.**
 
 
@@ -29,6 +30,7 @@ The repository is organized in three sub-directory, `jaccard_distance`, `rdpg` a
 **Repository structure:**
 <details>
 <summary>Click to expand</summary>
+
 ```bash
 .
 ├── Data.tar.gz # Data archive
@@ -74,6 +76,7 @@ The repository is organized in three sub-directory, `jaccard_distance`, `rdpg` a
 │       ├── hyenadna.py
 │       └── hyenadna.sh
 ```
+
 </details>
 
 ## 2. Set up directories and environments 
