@@ -13,3 +13,6 @@
 [submodule "representation_methods/hyenadna/hyena-dna"]
 	path = representation_methods/hyenadna/hyena-dna
 	url = https://github.com/HazyResearch/hyena-dna.git
+[submodule "representation_methods/hyenadna/hyenadna-small-32k-seqlen"]
+	path = representation_methods/hyenadna/hyenadna-small-32k-seqlen
+	url = https://huggingface.co/LongSafari/hyenadna-small-32k-seqlen
