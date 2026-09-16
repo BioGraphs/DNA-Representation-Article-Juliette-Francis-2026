@@ -16,3 +16,4 @@
 [submodule "representation_methods/hyenadna/hyenadna-small-32k-seqlen"]
 	path = representation_methods/hyenadna/hyenadna-small-32k-seqlen
 	url = https://huggingface.co/LongSafari/hyenadna-small-32k-seqlen
+	ignore = dirty
