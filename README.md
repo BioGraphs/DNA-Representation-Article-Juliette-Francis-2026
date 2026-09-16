@@ -27,19 +27,21 @@ The repository is organized in three sub-directory, `jaccard_distance`, `rdpg` a
 
 
 **Repository structure:**
+<details>
+<summary>Click to expand</summary>
 ```bash
 .
-├── Data.tar.gz              # Data archive
-├── install.sh               # Set up packages and directories
+├── Data.tar.gz # Data archive
 ├── README.md
-├── jaccard_distance         # Scripts to compare DNA representations with the Jaccard distance
+├── install.sh # Set up packages and directories
+├── jaccard_distance # Scripts to compare DNA representations with the Jaccard distance
 │   ├── embedding-comparator # Submodule
 │   ├── embedding_paths.txt
 │   ├── jaccard_similarity.py
 │   ├── jaccard_similarity.sh
 │   ├── prepare_data.py
 │   └── preprocess_data.sh
-├── plots                    # Notebooks to reproduce figures
+├── plots # Notebooks to reproduce figures
 │   ├── ani_figure_S1.ipynb
 │   ├── evidence_heatmaps_figures_6_and_S3.ipynb
 │   ├── jaccard_and_rdpg_clusters_confusion_matrix_figure_S5.ipynb
@@ -48,36 +50,31 @@ The repository is organized in three sub-directory, `jaccard_distance`, `rdpg` a
 │   ├── methods_distance_matrice_figures_3_and_5_and_S4.ipynb
 │   ├── pca_projection_figure_2.ipynb
 │   └── taxonomic_tree_figure_1.ipynb
-├── rdpg                     # Scripts to compare DNA representations with the RDPG framework
+├── rdpg # Scripts to compare DNA representations with the RDPG framework
 │   ├── compare_emb_with_rdpg.py
 │   ├── compare_emb_with_rdpg.sh
 │   ├── create_h0_distributions.py
 │   ├── data_kernel_latent_pos.py
 │   ├── omnibus_latent_pos.py
 │   └── prepare_results_files_for_plots.py
-├── representation_methods   # Scripts to create DNA representations
-│   ├── DNABERT-2
-│	│   ├── todo
-│	│   └── todo
-│   ├── DNABERT-S
-│	│   ├── todo
-│	│   └── todo
+├── representation_methods # Scripts to create DNA representations
+│   ├── TNF
+│   │   ├── README.md
+│   │   ├── TNF.py
+│   │   └── TNF.sh
 │   ├── dna2vec
-│	│   ├── dna2vec          # Submodule
-│	│   ├── DNA2VEC.py
-│	│   ├── DNA2VEC.sh
-│	│   └── README.md
-│   ├── HyenaDNA
-│	│   ├── hyena-dna        # Submodule
-│	│   ├── hyenadna.py
-│	│   ├── hyenadna.sh
-│	│   ├── hyenadna-small-32k-seqlen # Submodule
-│	│   └── README.md
-│   └── TNF
-│	│   ├── README.md
-│	│   ├── TNF.py
-│	│   └── TNF.sh
+│   │   ├── DNA2VEC.py
+│   │   ├── DNA2VEC.sh
+│   │   ├── README.md
+│   │   └── dna2vec # Submodule
+│   └── hyenadna
+│       ├── README.md
+│       ├── hyena-dna # Submodule
+│       ├── hyenadna-small-32k-seqlen # Submodule
+│       ├── hyenadna.py
+│       └── hyenadna.sh
 ```
+</details>
 
 ## 2. Set up directories and environments 
 
