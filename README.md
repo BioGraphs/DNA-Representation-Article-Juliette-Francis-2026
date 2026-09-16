@@ -59,22 +59,22 @@ The repository is organized in three sub-directory, `jaccard_distance`, `rdpg` a
 │   ├── data_kernel_latent_pos.py
 │   ├── omnibus_latent_pos.py
 │   └── prepare_results_files_for_plots.py
-├── representation_methods # Scripts to create DNA representations
-│   ├── TNF
-│   │   ├── README.md
-│   │   ├── TNF.py
-│   │   └── TNF.sh
-│   ├── dna2vec
-│   │   ├── DNA2VEC.py
-│   │   ├── DNA2VEC.sh
-│   │   ├── README.md
-│   │   └── dna2vec # Submodule
-│   └── hyenadna
-│       ├── README.md
-│       ├── hyena-dna # Submodule
-│       ├── hyenadna-small-32k-seqlen # Submodule
-│       ├── hyenadna.py
-│       └── hyenadna.sh
+└── representation_methods # Scripts to create DNA representations
+    ├── TNF
+    │   ├── README.md
+    │   ├── TNF.py
+    │   └── TNF.sh
+    ├── dna2vec
+    │   ├── DNA2VEC.py
+    │   ├── DNA2VEC.sh
+    │   ├── README.md
+    │   └── dna2vec # Submodule
+    └── hyenadna
+        ├── README.md
+        ├── hyena-dna # Submodule
+        ├── hyenadna-small-32k-seqlen # Submodule
+        ├── hyenadna.py
+        └── hyenadna.sh
 ```
 
 </details>
