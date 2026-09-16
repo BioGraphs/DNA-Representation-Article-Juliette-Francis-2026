@@ -21,7 +21,7 @@ The repository is organized in three sub-directory, `jaccard_distance`, `rdpg` a
 | S5             | `jaccard_and_rdpg_clusters_confusion_matrix_figure_S5.ipynb`     | Confusion matrix of Jaccard vs RDPG clusters         |
 | S6             | `k_value_exploration_figure_S6.ipynb`                            | Exploration of the results with various values of neighboors |
 
-**Before running the notebooks, make sure you have run the comparison pipelines (Jaccard distance and RDPG framework) in their corresponding environments, as explained below.**
+**Before running the notebooks, make sure you have run the comparison pipelines** (Jaccard distance and RDPG framework) in their corresponding environments, as explained below.
 
 
 **Re-compute DNA sequence representations (not mandatory to reproduce the article results):** To simplify analysis, and since regenerating them would not add anything new on our part, the DNA sequence representations for our dataset are provided directly in the Data.tar.gz archive. However, if you wish to generate them yourself, the code we used is available in the representation_methods directory. Each sub-directory corresponds to one method, and the scripts were written following the documentation found on that method's GitHub page. Instructions for setting up the environment for each method can be found in the corresponding sub-directory's README. To avoid overwriting the existing representation files, any representation you generate will have the same filename with the suffix `_bis` appended. Note that you will need GPU to use the models [DNABERT-2](https://github.com/MAGICS-LAB/DNABERT_2) and [DNABERT-S](https://github.com/MAGICS-LAB/DNABERT_S).
