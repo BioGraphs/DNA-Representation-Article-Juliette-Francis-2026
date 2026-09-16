@@ -11,7 +11,7 @@ SEQ_FILES=("bacteria_1")
 for seq_file in "${SEQ_FILES[@]}"; do
 	current_date_time=$(date)
 	echo "Date and time at the begining of the job: $current_date_time"
-	echo "Sequences file used: ${seq_file}.tsv"
+	echo "Sequences file used: ${seq_file}_sequences.csv"
 	python3 -W ignore $MODEL_DIR/DNA2VEC.py $DATA_DIR/Sequences/${seq_file}_sequences.csv $DATA_DIR/Embeddings/${seq_file}_dna2vec_embedding_bis.csv $k $WEIGHTS
 	current_date_time=$(date)
 	echo "Date and time at the end of the job: $current_date_time"

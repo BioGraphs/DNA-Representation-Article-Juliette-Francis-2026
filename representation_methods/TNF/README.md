@@ -9,8 +9,7 @@ conda activate TNF
 
 ## 2. Create the representation
 
-Run TNF.sh file.
-On a terminal, in this Git repository, run the following command lines:
+Open a terminal in the dna_representation_article directory and run the following command lines.
 ```bash
 conda activate TNF
 ./representation_methods/TNF/TNF.sh
