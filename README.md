@@ -60,6 +60,8 @@ The repository is organized in three sub-directory, `jaccard_distance`, `rdpg` a
 │   ├── omnibus_latent_pos.py
 │   └── prepare_results_files_for_plots.py
 └── representation_methods # Scripts to create DNA representations
+    ├── DNABERT-2 #-> todo
+    ├── DNABERT-S #-> todo
     ├── TNF
     │   ├── README.md
     │   ├── TNF.py
