@@ -122,6 +122,9 @@ class HyenaDNAPreTrainedModel(PreTrainedModel):
 
 
 def main(input_file, output_file):
+    if os.path.isfile(output_file):
+        raise ValueError(f"Output file '{output_file}' already exists. Please delete the existing file if you want to use this name")
+
     # Load DNA sequences file___________________________________________
     dna_seq_list = []
     species_list = []

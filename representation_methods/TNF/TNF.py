@@ -53,6 +53,9 @@ def TNF_with_relative_frequencies(sequences, k, vocabulary):
 
 
 def main(input_file, output_file, k):
+    if os.path.isfile(output_file):
+        raise ValueError(f"Output file '{output_file}' already exists. Please delete the existing file if you want to use this name")
+
     vocabulary = which_vocabulary(k)
 
     # Load DNA sequences file___________________________________________

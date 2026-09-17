@@ -1,0 +1,14 @@
+einops
+transformers==4.27
+peft
+omegaconf
+torch==1.13.1
+evaluate
+accelerate
+numpy==1.26.4
+scikit-learn
+Pillow
+textaugment
+scipy
+gdown
+textblob==0.17.1

@@ -13,9 +13,9 @@ pip install -r ./representation_methods/DNABERT-2/requirements.txt
 pip uninstall triton
 ```
 
-## 3. Create the embedding (GPU Nvidia needed)
+## 3. Create the embedding
 
-Open a terminal in the `dna_representation_article` directory and run the following command lines.
+Open a terminal in the `dna_representation_article` directory and run the following command lines. It might take some time if you don't have a GPU.
 ```bash
 conda activate dnabert2 # if not already done
 ./representation_methods/DNABERT-2/dnabert2.sh
