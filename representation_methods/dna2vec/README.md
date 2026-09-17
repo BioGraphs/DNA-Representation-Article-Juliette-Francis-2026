@@ -10,7 +10,7 @@ There are warnings during the packages installation that do not have an impact o
 
 ## 2. Create the embedding
 
-Open a terminal in the dna_representation_article directory and run the following command lines.
+Open a terminal in the `dna_representation_article` directory and run the following command lines.
 ```bash
 conda activate dna2vec # if not already done
 ./representation_methods/dna2vec/DNA2VEC.sh
