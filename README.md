@@ -8,7 +8,7 @@ Code to reproduce the results presented in "Graph-based comparison reveals disti
 
 ## 1. Overview
 
-The repository is organized in three sub-directory, `jaccard_distance`, `rdpg`, `plots` and `representation_methods`. The first two contain all the scripts needed to compare DNA representations with either the Jaccard distance metric, or the RDPG framework. DNA representation made with TNF (Tetra-Nucleotide Frequency), [dna2vec](https://github.com/pnpnpn/dna2vec), [HyenaDNA](https://github.com/HazyResearch/hyena-dna), [DNABERT-2](https://github.com/MAGICS-LAB/DNABERT_2) and [DNABERT-S](https://github.com/MAGICS-LAB/DNABERT_S) are available in the archive `Data.tar.gz` in the sub-directory `Embeddings`. The directory `plots` contains jupyter notebooks to generate the article figures. The numerotation of the corresponding figure is in the name of the notebook and detailed in the following table:
+The repository is organized in four sub-directories, `jaccard_distance`, `rdpg`, `plots` and `representation_methods`. The first two contain all the scripts needed to compare DNA representations with either the Jaccard distance metric, or the RDPG framework. DNA representation made with TNF (Tetra-Nucleotide Frequency), [dna2vec](https://github.com/pnpnpn/dna2vec), [HyenaDNA](https://github.com/HazyResearch/hyena-dna), [DNABERT-2](https://github.com/MAGICS-LAB/DNABERT_2) and [DNABERT-S](https://github.com/MAGICS-LAB/DNABERT_S) are available in the archive `Data.tar.gz` in the sub-directory `Embeddings`. The directory `plots` contains jupyter notebooks to generate the article figures. The numerotation of the corresponding figure is in the name of the notebook and detailed in the following table:
 
 <details>
 <summary>Click to expand</summary>
@@ -156,9 +156,11 @@ jupyter lab
 You might need to install an IRkernel. To do so, open a terminal in jupyter lab and run:
 ```bash
 R
-> install.packages('IRkernel')
-> IRkernel::installspec()
+```
+
+```R
+install.packages('IRkernel')
+IRkernel::installspec()
 ```
 Then you can open a notebook and choose a R kernel.
-
 

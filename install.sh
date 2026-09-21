@@ -34,6 +34,7 @@ create_environments() {
 
     echo "=== Creating environment 'rdpg' ==="
     conda create -y -n rdpg python=3.12
+    conda run --no-capture-output -n rdpg pip install numpy==1.26.4
     conda run --no-capture-output -n rdpg pip install graspologic==3.4.1
     conda run --no-capture-output -n rdpg pip install future==1.0.0
     conda run --no-capture-output -n rdpg pip install torch==2.6.0
