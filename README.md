@@ -171,3 +171,9 @@ IRkernel::installspec()
 ```
 Then you can open a notebook and choose a R kernel.
 
+Each notebook installs any missing R package automatically on first run. If you prefer to pre-install them all up-front, run the optional script (R packages are installed from CRAN/Bioconductor, not by `install.sh`):
+```bash
+conda activate plots
+Rscript plots/install_R_packages.R
+```
+
