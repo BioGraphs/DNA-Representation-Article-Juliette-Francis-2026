@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # RDPG hyperparameters
-K=70
+K=25
 N_BOOSTRAPS=999
 D=0
 DIST=euclidean
