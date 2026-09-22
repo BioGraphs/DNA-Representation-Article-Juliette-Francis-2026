@@ -1,0 +1,8 @@
+# Dependencies for the Jaccard-distance comparison pipeline (conda env: embedding_comparator)
+# Based on the embedding-comparator submodule requirements plus pins from the local
+# conda `embedding_comparator` env (pip list). numpy must stay at 2.0; later versions
+# break the embedding-comparator tooling.
+scikit-learn==1.9.0
+umap-learn==0.5.12
+numpy==2.0.0
+pandas==3.0.5

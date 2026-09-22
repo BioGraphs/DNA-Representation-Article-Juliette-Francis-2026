@@ -103,8 +103,15 @@ git clone https://forge.inrae.fr/holobionts_pepr/workpackage_1/dna_representatio
 cd dna_representation_article
 git submodule update --init --recursive
 chmod +x install.sh
-./install.sh # installs packages and creates the data directory (uncompressed `Data.tar.gz`) and a results directory.
+./install.sh # creates the data directory (uncompressed `Data.tar.gz`), a results directory, and three conda environments (`rdpg`, `embedding_comparator`, `plots`) from the `requirements_*.txt` files at the repo root.
 ```
+
+`install.sh` is **idempotent**: re-running it is safe. It skips extracting `Data.tar.gz` if `Data/Embeddings` already exists, uses `mkdir -p` for the `Results/` tree, and skips `conda create` for environments that already exist. Run it from the repo root.
+
+The three analysis environments are defined by the following files (run them manually with `conda create` + `pip install -r`, or let `install.sh` do it):
+- `requirements_rdpg.txt` — RDPG pipeline (`rdpg` env)
+- `requirements_embedding_comparator.txt` — Jaccard pipeline (`embedding_comparator` env)
+- `requirements_plots.txt` — plotting notebooks (`plots` env; needs `r-base` and an R IRkernel)
 
 
 ## 3. Launch the comparison of the DNA representations with the RDPG framework
