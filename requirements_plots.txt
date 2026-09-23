@@ -1,5 +1,6 @@
 # Dependencies for the analysis notebooks (conda env: plots)
-# The notebooks are written in R, so this env is just JupyterLab (pinned from the
-# local conda `plots` env) plus an R kernel. Create the env with conda (r-base) and
-# register the IRkernel in R as described in the README.
+# The notebooks are written in R. This env provides JupyterLab via pip and a
+# complete R setup via conda: r-base=4.4.3, r-irkernel, r-remotes, r-biocmanager,
+# and the R packages used by the figures (installed as conda-forge binaries by
+# install.sh).
 jupyterlab==4.6.3

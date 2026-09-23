@@ -38,8 +38,41 @@ mkdir -p ${RESULTS_DIR}/Plots
 mkdir -p ${RESULTS_DIR}/Jaccard_distance
 
 # ____ 3. Create conda environments (idempotent)
-ensure_env plots jupyterlab r-base -c conda-forge
+# The `plots` env holds everything needed to run the notebooks: JupyterLab (pip)
+# and a pinned R 4.4.3 with its IRkernel plus the R packages used by the figures,
+# all installed from conda-forge binary packages (fast, no source compilation).
+#
+# NOTE: ggtree and ggtreeExtra (used by the taxonomic tree, figure 1) are NOT
+# installed here: they are not available on conda-forge and compiling them in a
+# conda R env is fragile. They must be installed separately if figure 1 is needed.
+R_PACKAGES=(
+  r-ggplot2=4.0.3
+  r-dplyr=1.2.1
+  r-glue=1.8.1
+  r-rcolorbrewer=1.1_3
+  r-dendextend=1.19.1
+  r-patchwork=1.3.2
+  r-circlize=0.4.18
+  r-rstatix=1.1.0
+  r-reshape2=1.4.5
+  r-ggbreak=0.1.7
+  r-stringr=1.6.0
+  r-tidyr=1.3.2
+  r-plotly=4.12.1
+  r-ggforce=0.5.0
+  r-purrr=1.2.2
+  r-gplots=3.3.0
+  r-jsonlite=2.0.0
+  r-aricode=1.1.0
+  r-readr=2.2.0
+  r-ade4=1.7_24
+  r-gridextra=2.3.1
+  r-cluster=2.1.8.3
+)
+ensure_env plots jupyterlab r-base=4.4.3 r-irkernel r-remotes r-biocmanager "${R_PACKAGES[@]}" -c conda-forge
 conda run --no-capture-output -n plots pip install -r ${CURRENT_DIR}/requirements_plots.txt
+# Register the R kernel of the `plots` env (points at envs/plots/bin/R)
+conda run --no-capture-output -n plots Rscript -e 'IRkernel::installspec()'
 
 ensure_env rdpg python=3.12
 conda run --no-capture-output -n rdpg pip install -r ${CURRENT_DIR}/requirements_rdpg.txt

@@ -111,7 +111,7 @@ chmod +x install.sh
 The three analysis environments are defined by the following files (run them manually with `conda create` + `pip install -r`, or let `install.sh` do it):
 - `requirements_rdpg.txt` — RDPG pipeline (`rdpg` env)
 - `requirements_embedding_comparator.txt` — Jaccard pipeline (`embedding_comparator` env)
-- `requirements_plots.txt` — plotting notebooks (`plots` env; needs `r-base` and an R IRkernel)
+- `requirements_plots.txt` — plotting notebooks (`plots` env). This env contains everything needed: JupyterLab, a pinned R 4.4.3 with its IRkernel, and the R packages used by the figures — all installed from conda-forge binary packages directly by `install.sh` (no source compilation).
 
 
 ## 3. Launch the comparison of the DNA representations with the RDPG framework
@@ -160,20 +160,7 @@ conda activate plots
 jupyter lab
 ```
 
-You might need to install an IRkernel. To do so, open a terminal in jupyter lab and run:
-```bash
-R
-```
+`install.sh` installs everything into the `plots` env, including the R 4.4.3 kernel (`ir`) and the R packages used by the figures (from conda-forge). In JupyterLab, open a notebook and select the **R** kernel provided by this environment (you should not need to install anything manually).
 
-```R
-install.packages('IRkernel')
-IRkernel::installspec()
-```
-Then you can open a notebook and choose a R kernel.
-
-Each notebook installs any missing R package automatically on first run. If you prefer to pre-install them all up-front, run the optional script (R packages are installed from CRAN/Bioconductor, not by `install.sh`):
-```bash
-conda activate plots
-Rscript plots/install_R_packages.R
-```
+**Note on `ggtree`/`ggtreeExtra` (figure 1, taxonomic tree):** these Bioconductor packages are not available as conda-forge binaries and compiling them inside a conda R env is not reproducible, so they are intentionally **not** installed by `install.sh`. If you need figure 1, install them separately into the `plots` env, e.g. with `BiocManager::install(c("ggtree","ggtreeExtra"))`, or use a container.
 
