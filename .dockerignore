@@ -1,0 +1,19 @@
+# Never copy local Data/ or Results/ — on a new machine these do not exist and
+# are created from Data.tar.gz / Results tree by install.sh. Excluding them
+# makes the container reproduce the fresh-machine flow and shrinks the context.
+Data/
+Results/
+
+# VCS / editor cruft not needed in the image
+.git/
+.gitignore
+AGENTS.md
+.vscode/
+.idea/
+**/.ipynb_checkpoints/
+**/__pycache__/
+*.pyc
+
+# Local container-less artifacts / OS files
+*.sif
+.DS_Store
