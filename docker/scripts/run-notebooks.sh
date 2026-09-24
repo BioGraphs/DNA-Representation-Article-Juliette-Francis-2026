@@ -24,7 +24,6 @@ for nb in "${notebooks[@]}"; do
     conda run --no-capture-output -n plots jupyter nbconvert \
         --to notebook \
         --execute \
-        --inplace=false \
         --output "${OUT_DIR}/${name}_executed.ipynb" \
         "${nb}"
 done

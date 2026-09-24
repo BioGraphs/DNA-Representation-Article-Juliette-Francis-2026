@@ -1,27 +1,38 @@
 # Docker environment for the "Graph-based comparison..." paper
 
 This directory defines a Docker image intended to **reproduce the repository's
-environment on a fresh machine** and let you verify that the notebooks run and
-the results can be regenerated.
+conda environments** so you can run the RDPG/Jaccard pipelines and the
+notebooks without installing conda/R on your host.
 
-The image is based on **Ubuntu 26.04 LTS**, installs **Miniconda** (as the
-README instructs), copies the repository (source + `Data.tar.gz` + the checked
-out submodules), and runs `install.sh` to build the three conda environments
-(`rdpg`, `embedding_comparator`, `plots`) and unpack the data.
+## Design: envs-only image + bind-mounted repo
+
+The image installs **only the packages/environments**. The repo, its data and
+its results are **not** baked in — they are **bind-mounted** over `/workspace`
+at runtime. This means:
+
+- The image is small and contains no data/submodules/Results.
+- Your repo's `Data/` and `Results/` live on your host and **persist** across
+  container runs (nothing is lost when the container is removed).
+- On startup the entrypoint automatically runs `./install.sh --data-only`
+  against the bind-mounted repo, unpacking `Data.tar.gz` and creating the
+  `Results/` tree the first time. It is idempotent, so later starts are quick
+  no-ops (set `AUTO_SETUP=0` to disable).
 
 ## Design notes
 
-- **No SSH/INRAE credentials needed.** The repo is copied from your local
-  workspace into the image. The submodules are copied verbatim as plain files
-  (the pipelines use them as files), so there is no network git fetch during the
-  build. Only Miniconda and the conda-forge/pip artifacts are downloaded.
-- **`Data/` and `Results/` are excluded by `.dockerignore`.** They are recreated
-  from `Data.tar.gz` / `install.sh` inside the container, matching the
-  new-machine flow exactly. This also keeps the build context small.
-- **The build sets up the environments only**; it does *not* run the slow RDPG /
-  Jaccard pipelines or the notebooks (those can be run interactively afterwards).
-- `install.sh` is idempotent and runs unmodified, so a change here tests the
-  repo's own instructions.
+- **Bind-mount only — no network git fetch.** Submodules and `Data.tar.gz` come
+  from your host repo via the bind mount, used as plain files by the pipelines;
+  no network git fetch or private INRAE / SSH credentials are needed.
+- **Bioconductor packages come from bioconda as precompiled binaries.**
+  `ComplexHeatmap`, `ggtree`, and `ggtreeExtra` are not on conda-forge but are
+  available on the bioconda channel, built for R 4.5. `install.sh --envs-only`
+  installs them as binaries, so no compiler toolchain or source compilation is
+  needed and the build stays fast.
+- **The build sets up the environments only**; it does *not* unpack data, run
+  the slow RDPG / Jaccard pipelines, or the notebooks (all of that happens at
+  runtime against the bind-mounted repo).
+- `install.sh` is idempotent and runs unmodified (with `--envs-only` at build,
+  `--data-only` at runtime), so a change here tests the repo's own instructions.
 
 ## Prerequisites
 
@@ -30,7 +41,7 @@ out submodules), and runs `install.sh` to build the three conda environments
 ## Build
 
 Run from the repository root (the build context must be the repo root so that
-`Data.tar.gz` and the submodules are included):
+`install.sh` and the two `requirements_*.txt` files are included):
 
 ```bash
 cd dna_representation_article
@@ -44,20 +55,31 @@ Notes:
   unless the requirements change.
 - If `docker build` needs more memory than defaults allow (PyTorch install /
   conda solve), pass `--memory`/`--memory-swap` to the docker daemon as needed.
+- The image contains **no repo files** — a `docker run` without the bind mount
+  will have neither the repo nor data (by design).
 
-## Run — interactive shell
+## Run — interactive shell (bind-mount the repo)
+
+Mount the repository over `/workspace` so the entrypoint can set up `Data/` and
+`Results/` on your host:
 
 ```bash
-docker run --rm -it dna-article:ubuntu26.04 bash
+docker run --rm -it \
+  -v "$PWD:/workspace" \
+  dna-article:ubuntu26.04 bash
 ```
 
-You land in `/workspace` with conda initialised. Three envs are available:
+On the first run the entrypoint auto-unpacks `Data.tar.gz` and creates the
+`Results/` tree in your host repo; later runs are no-ops. You land in
+`/workspace` with conda initialised. Three envs are available:
 
 | env                   | purpose                          |
 |-----------------------|----------------------------------|
 | `rdpg`                | RDPG comparison pipeline         |
 | `embedding_comparator`| Jaccard-distance pipeline        |
-| `plots`               | JupyterLab + R 4.4.3 (IRkernel)  |
+| `plots`               | JupyterLab + R 4.5.3 (IRkernel)  |
+
+Skip the automatic data setup by starting with `-e AUTO_SETUP=0`.
 
 ## Reproduce results inside the container
 
@@ -75,6 +97,9 @@ python3 ./jaccard_distance/prepare_data.py ./jaccard_distance/embedding_paths.tx
 ./jaccard_distance/jaccard_similarity.sh
 ```
 
+Results are written to `Results/` — because the repo is bind-mounted, they are
+saved directly on your host.
+
 ### Run a notebook headlessly (verifies the R stack end-to-end)
 
 A helper is bundled in the image:
@@ -87,14 +112,17 @@ run-notebooks.sh plots/pca_projection_figure_2.ipynb   # a single notebook
 Executed copies are written to `Results/Plots/notebook_execution/` so the
 repo's own notebooks are never modified.
 
-> Figure 1 (taxonomic tree) additionally needs `ggtree` / `ggtreeExtra`, which
-> are intentionally **not** installed by `install.sh` (not on conda-forge; see
-> README). Install them separately if you need figure 1.
+> Figure 1 (taxonomic tree) uses `ggtree` / `ggtreeExtra`, and the heatmap
+> figures use `ComplexHeatmap`. These Bioconductor packages are not on
+> conda-forge, so `install.sh --envs-only` installs them into the `plots` env
+> from the bioconda channel as precompiled binaries.
 
 ### Interactive JupyterLab
 
 ```bash
-docker run --rm -it -p 8888:8888 dna-article:ubuntu26.04 bash
+docker run --rm -it -p 8888:8888 \
+  -v "$PWD:/workspace" \
+  dna-article:ubuntu26.04 bash
 conda activate plots
 jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root
 ```

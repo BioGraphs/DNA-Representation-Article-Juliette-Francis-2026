@@ -4,21 +4,25 @@
 # "Graph-based comparison..." paper on a fresh machine.
 # - OS : Ubuntu 26.04 LTS
 # - CI : Miniconda (installed per the README instructions)
-# - Repo: the current workspace is COPYed in, submodules checked out,
-#         and `install.sh` is run to build the three conda envs and data.
+# - Envs: only the three conda environments are installed into the image
+#         (rdpg, embedding_comparator, plots). The repo, data and results are
+#         bind-mounted at runtime, so the image itself carries no repo files,
+#         no Data.tar.gz and no Results/.
 #
-# Build (from the repo root so the build context includes it):
+# Build (from the repo root so the build context includes the files we COPY):
 #   docker build -t dna-article:ubuntu26.04 -f docker/Dockerfile .
 #
-# Run an interactive shell with the envs and repo:
-#   docker run --rm -it dna-article:ubuntu26.04
+# Run an interactive shell with the envs and the repo bind-mounted in:
+#   docker run --rm -it -v "$PWD:/workspace" dna-article:ubuntu26.04
 #
 # See docker/README.md for details and the JupyterLab workflow.
 
 FROM ubuntu:26.04
 
 # ---------------------------------------------------------------------------
-# System prerequisites (kept minimal; conda handles the Python/R toolchains).
+# System prerequisites (kept minimal; conda handles the Python/R toolchains and
+# all R packages, including the Bioconductor ones from bioconda, are installed
+# as precompiled binaries, so no compiler toolchain is required).
 # ---------------------------------------------------------------------------
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -49,19 +53,15 @@ RUN curl -fsSL -o /tmp/miniconda.sh "${MINICONDA_URL}" \
     && conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
 
 # ---------------------------------------------------------------------------
-# Copy the repository (source files + Data.tar.gz + the checked-out submodule
-# working trees) into the image.
-# .dockerignore excludes the local gitignored Data/ and Results/ so the fresh
-# install.sh flow (unpack Data.tar.gz, create Results/) is exercised exactly as
-# it would be on a new machine.
-#
-# The submodules (embedding-comparator, dna2vec, hyena-dna, ...) are already
-# checked out in the build context and are used as plain files by the
-# pipelines, so they are copied verbatim; no network git fetch is needed and
-# the private INRAE remote / SSH keys are never required inside the build.
+# Copy only the files needed to build the conda environments into the image.
+# The repo, data and results are not part of the image: they are bind-mounted
+# over /workspace at runtime. This keeps the context small and the image free
+# of data/submodules/Results.
+# The manifest files are copied before install.sh so changes to the repo
+# alone do not bust the (slow) env-install layer cache.
 # ---------------------------------------------------------------------------
 WORKDIR /workspace
-COPY . /workspace/
+COPY install.sh requirements_rdpg.txt requirements_embedding_comparator.txt /opt/setup/
 
 # ---------------------------------------------------------------------------
 # Make `pip install` resilient to flaky networks when the envs are built.
@@ -74,12 +74,16 @@ ENV PIP_DEFAULT_TIMEOUT=100
 ENV PIP_RETRIES=15
 
 # ---------------------------------------------------------------------------
-# Run the (idempotent) installer.
-# This unpacks Data.tar.gz, creates the Results/ tree, and builds the three
-# conda environments: rdpg, embedding_comparator, plots.
+# Run the installer in envs-only mode: builds the three conda environments
+# (rdpg, embedding_comparator, plots). No data unpack and no Results/ tree are
+# created in the image — those happen at runtime against the bind-mounted repo.
 # ---------------------------------------------------------------------------
-RUN chmod +x install.sh \
-    && bash ./install.sh
+RUN chmod +x /opt/setup/install.sh \
+    && cd /opt/setup && bash ./install.sh --envs-only \
+    # Register the plots env kernels (Python + IRkernel for R) so VS Code's
+    # notebook kernel picker can find them inside the container.
+    && conda run -n plots python -m ipykernel install --sys-prefix --name plots-python --display-name "Python (plots)" \
+    && conda run -n plots Rscript -e 'IRkernel::installspec(name="plots-r", displayname="R (plots)", prefix="/opt/conda/envs/plots")'
 
 # Copy the interactive entrypoint / helper scripts.
 COPY docker/scripts /usr/local/bin
