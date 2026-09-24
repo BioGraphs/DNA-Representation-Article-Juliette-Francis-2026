@@ -5,3 +5,6 @@
 # VS Code dev-container config (not needed by non-VS Code users)
 .devcontainer/
 docker/scripts/jupyterlab-start.sh
+
+# Local-only agent instructions (not for the public repo)
+AGENTS.md
