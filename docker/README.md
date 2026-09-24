@@ -100,18 +100,6 @@ python3 ./jaccard_distance/prepare_data.py ./jaccard_distance/embedding_paths.tx
 Results are written to `Results/` — because the repo is bind-mounted, they are
 saved directly on your host.
 
-### Run a notebook headlessly (verifies the R stack end-to-end)
-
-A helper is bundled in the image:
-
-```bash
-run-notebooks.sh                    # execute every plots/*.ipynb
-run-notebooks.sh plots/pca_projection_figure_2.ipynb   # a single notebook
-```
-
-Executed copies are written to `Results/Plots/notebook_execution/` so the
-repo's own notebooks are never modified.
-
 > Figure 1 (taxonomic tree) uses `ggtree` / `ggtreeExtra`, and the heatmap
 > figures use `ComplexHeatmap`. These Bioconductor packages are not on
 > conda-forge, so `install.sh --envs-only` installs them into the `plots` env

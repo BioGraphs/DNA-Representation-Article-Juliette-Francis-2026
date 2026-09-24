@@ -52,7 +52,7 @@ Build (context must be repo root) and run (**bind mount required**):
 docker build -t dna-article:ubuntu26.04 -f docker/Dockerfile .
 docker run --rm -it -v "$PWD:/workspace" dna-article:ubuntu26.04 bash   # lands in /workspace; auto-setups Data/Results on the host
 ```
-Inside the container the same env names and pipeline commands apply as above. `Results/` written by the pipelines are saved to the host via the bind mount. A `run-notebooks.sh` helper executes `plots/*.ipynb` headlessly (output to `Results/Plots/notebook_execution/`, originals untouched). Note `run-notebooks.sh` path is hardcoded to `/workspace/plots` — container-only, not portable to host.
+Inside the container the same env names and pipeline commands apply as above. `Results/` written by the pipelines are saved to the host via the bind mount.
 
 Gotchas (Docker):
 - Keep the build context at the repo root so `install.sh` + `requirements_*.txt` are included.

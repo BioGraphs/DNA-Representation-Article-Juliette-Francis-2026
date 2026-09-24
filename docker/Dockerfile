@@ -85,10 +85,9 @@ RUN chmod +x /opt/setup/install.sh \
     && conda run -n plots python -m ipykernel install --sys-prefix --name plots-python --display-name "Python (plots)" \
     && conda run -n plots Rscript -e 'IRkernel::installspec(name="plots-r", displayname="R (plots)", prefix="/opt/conda/envs/plots")'
 
-# Copy the interactive entrypoint / helper scripts.
-COPY docker/scripts /usr/local/bin
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh \
-    && chmod +x /usr/local/bin/run-notebooks.sh
+# Copy the interactive entrypoint.
+COPY docker/scripts/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # ---------------------------------------------------------------------------
 # Runtime: start an interactive shell with conda available so the user can
