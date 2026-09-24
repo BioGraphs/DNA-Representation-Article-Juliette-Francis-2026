@@ -96,25 +96,19 @@ The repository is organized in four sub-directories, `jaccard_distance`, `rdpg`,
 
 ## 2. Set up directories and environments for the comparison of representations
 
-Please [install conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html) if you do not have it already.
+First, clone the repository and initialise its submodules. This step is needed for both the Docker and the manual installation below.
 
 ```bash
 git clone https://forge.inrae.fr/holobionts_pepr/workpackage_1/dna_representation_article.git
 cd dna_representation_article
 git submodule update --init --recursive
-chmod +x install.sh
-./install.sh # creates the data directory (uncompressed `Data.tar.gz`), a results directory, and three conda environments (`rdpg`, `embedding_comparator`, `plots`).
 ```
 
-`install.sh` is **idempotent**: re-running it is safe. It skips extracting `Data.tar.gz` if `Data/Embeddings` already exists, uses `mkdir -p` for the `Results/` tree, and skips `conda create` for environments that already exist. Run it from the repo root.
+### 2.1 Docker (recommended)
 
-The `rdpg` and `embedding_comparator` environments are defined by `requirements_rdpg.txt` and `requirements_embedding_comparator.txt` at the repo root (run them manually with `conda create` + `pip install -r`, or let `install.sh` do it). The `plots` env needs no `requirements` file: everything (JupyterLab, a pinned R 4.5.3 with its IRkernel, and the R packages used by the figures, including the Bioconductor ones from bioconda) is installed by `install.sh` as precompiled conda binaries (no source compilation).
+This is the easiest way to get started: the image provides the three conda environments (`rdpg`, `embedding_comparator`, `plots`) without installing conda/R on your machine. Full details are in [`docker/README.md`](docker/README.md).
 
-### 2.1 Alternative: set up the environments with Docker
-
-If you prefer not to install conda/R on your machine, build and run the provided Docker image instead of the manual install above. Full details are in [`docker/README.md`](docker/README.md).
-
-The image contains **only the three conda environments** (`rdpg`, `embedding_comparator`, `plots`); the repo, its `Data.tar.gz` and `Results/` are **bind-mounted** over `/workspace` at runtime. On startup the entrypoint automatically runs `./install.sh --data-only`, which unpacks `Data.tar.gz` and creates the `Results/` tree in your host repo (idempotent — later starts are no-ops; set `AUTO_SETUP=0` to disable).
+The image contains **only the three conda environments**; the repo, its `Data.tar.gz` and `Results/` are **bind-mounted** over `/workspace` at runtime. On startup the entrypoint automatically runs `./install.sh --data-only`, which unpacks `Data.tar.gz` and creates the `Results/` tree in your host repo (idempotent — later starts are no-ops; set `AUTO_SETUP=0` to disable).
 
 From the repository root:
 ```bash
@@ -124,11 +118,26 @@ docker build -t dna-article:ubuntu26.04 -f docker/Dockerfile .
 Run interactively, mounting the current repo:
 ```bash
 docker run --rm -it \
+  -p 8888:8888 \
   -v "$PWD:/workspace" \
   dna-article:ubuntu26.04 bash
 ```
+The `-p 8888:8888` forwards the container's port 8888 to your host; it is useful later for the JupyterLab notebook server (section 5).
 
 You land in `/workspace` with the three environments ready. Because the repo is bind-mounted, `Results/` written by the pipelines/notebooks are saved directly on your host. The same environment activation commands described in sections 3, 4 and 5 apply inside the container.
+
+### 2.2 Manual installation
+
+Please [install conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html) if you do not have it already.
+
+```bash
+chmod +x install.sh
+./install.sh # creates the data directory (uncompressed `Data.tar.gz`), a results directory, and three conda environments (`rdpg`, `embedding_comparator`, `plots`).
+```
+
+`install.sh` is **idempotent**: re-running it is safe. It skips extracting `Data.tar.gz` if `Data/Embeddings` already exists, uses `mkdir -p` for the `Results/` tree, and skips `conda create` for environments that already exist. Run it from the repo root.
+
+The `rdpg` and `embedding_comparator` environments are defined by `requirements_rdpg.txt` and `requirements_embedding_comparator.txt` at the repo root (run them manually with `conda create` + `pip install -r`, or let `install.sh` do it). The `plots` env needs no `requirements` file: everything (JupyterLab, a pinned R 4.5.3 with its IRkernel, and the R packages used by the figures, including the Bioconductor ones from bioconda) is installed by `install.sh` as precompiled conda binaries (no source compilation).
 
 
 ## 3. Launch the comparison of the DNA representations with the RDPG framework
@@ -177,9 +186,16 @@ conda activate plots
 jupyter lab
 ```
 
-`install.sh` installs everything into the `plots` env, including the R 4.5.3 kernel (`ir`) and the R packages used by the figures (from conda-forge). In JupyterLab, open a notebook and select the **R** kernel provided by this environment (you should not need to install anything manually).
+> **If you are using Docker (section 2.1):** you are already inside the container. Jupyter's default is to listen only on localhost, so expose it with the networking flags so your host browser can reach it:
+> ```bash
+> conda activate plots
+> jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+> ```
+> Then open `http://localhost:8888` (the token is shown in the terminal). The `-p 8888:8888` you added at `docker run` (section 2.1) makes this port reachable from your host.
 
-The Bioconductor R packages used by the figures that are not available as conda-forge binaries (`ComplexHeatmap` for the heatmap figures, plus `ggtree`/`ggtreeExtra` for the taxonomic tree, figure 1) are installed automatically by `install.sh` into the `plots` env from the **bioconda** channel as precompiled binaries (so no compiler toolchain is needed).
+In JupyterLab, open a notebook and select the **R** kernel provided by the `plots` env (you should not need to install anything manually).
+
+> **Manual installation only — the Docker image already includes these.** `install.sh` installs into the `plots` env the R 4.5.3 kernel (`ir`) and the R packages used by the figures (from conda-forge). The Bioconductor R packages that are not available as conda-forge binaries (`ComplexHeatmap` for the heatmap figures, plus `ggtree`/`ggtreeExtra` for the taxonomic tree, figure 1) are installed automatically by `install.sh` into the `plots` env from the **bioconda** channel as precompiled binaries (so no compiler toolchain is needed).
 
 > **Tip:** repeat the RDPG/Jaccard pipelines (sections 3 and 4) before executing a notebook — the notebooks read their results from `Results/`.
 
