@@ -182,7 +182,7 @@ Once nearest neighboors are identified, the Jaccard distance metric can be compu
 From the repository root:
 ```bash
 conda activate plots
-jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root # if you are using Docker "jupyter lab" only otherwise
+jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root # if you are using Docker. Otherwise, write only "jupyter lab".
 ```
 Then open `http://localhost:8888` (the token is shown in the terminal).
 
