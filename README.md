@@ -39,8 +39,15 @@ The repository is organized in five sub-directories, `jaccard_distance`, `rdpg`,
 ```bash
 .
 ├── Data.tar.gz # Data archive
-├── README.md
 ├── install.sh # Set up packages and directories
+├── requirements_rdpg.txt # Conda deps for the `rdpg` env
+├── requirements_embedding_comparator.txt # Conda deps for the `embedding_comparator` env
+├── README.md
+├── docker # Reproducible environments-only Docker image (repo is bind-mounted)
+│   ├── Dockerfile
+│   ├── README.md
+│   └── scripts
+│       └── docker-entrypoint.sh
 ├── jaccard_distance # Scripts to compare DNA representations with the Jaccard distance
 │   ├── embedding-comparator # Submodule
 │   ├── embedding_paths.txt
@@ -66,30 +73,30 @@ The repository is organized in five sub-directories, `jaccard_distance`, `rdpg`,
 │   └── prepare_results_files_for_plots.py
 └── representation_methods # Scripts to create DNA representations
     ├── DNABERT-2
-    │   ├── README.md
     │   ├── dnabert2.py
     │   ├── dnabert2.sh
-    │   └── requirements.txt
+    │   ├── requirements.txt
+    │   └── README.md
     ├── DNABERT-S
-    │   ├── README.md
     │   ├── dnaberts.py
     │   ├── dnaberts.sh
-    │   └── requirements.txt
+    │   ├── requirements.txt
+    │   └── README.md
     ├── TNF
-    │   ├── README.md
     │   ├── TNF.py
-    │   └── TNF.sh
+    │   ├── TNF.sh
+    │   └── README.md
     ├── dna2vec
     │   ├── DNA2VEC.py
     │   ├── DNA2VEC.sh
     │   ├── README.md
     │   └── dna2vec # Submodule
     └── hyenadna
+        ├── hyenadna.py
+        ├── hyenadna.sh
         ├── README.md
         ├── hyena-dna # Submodule
-        ├── hyenadna-small-32k-seqlen # Submodule
-        ├── hyenadna.py
-        └── hyenadna.sh
+        └── hyenadna-small-32k-seqlen # Submodule
 ```
 
 </details>
