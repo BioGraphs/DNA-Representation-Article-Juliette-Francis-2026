@@ -17,16 +17,16 @@ The repository is organized in five sub-directories, `jaccard_distance`, `rdpg`,
 <details>
 <summary>Click to expand</summary>
 
-| Figure(s)      | Notebook                                                        | Description                                       |
-|----------------|------------------------------------------------------------------|----------------------------------------------------|
-| 1              | `taxonomic_tree_figure_1.ipynb`                                  | Taxonomic tree of DNA sequences species                                      |
-| 2              | `pca_projection_figure_2.ipynb`                                  | PCA projection of the representations                                     |
-| 3, 5, S4       | `methods_distance_matrice_figures_3_and_5_and_S4.ipynb`           | Distance matrices for the representation methods                   |
-| 4, S2          | `jaccard_heatmaps_figures_4_and_S2.ipynb`                         | Heatmaps showing Jaccard distance heatmaps                           |
-| 6, S3          | `evidence_heatmaps_figures_6_and_S3.ipynb`                        | Heatmaps showing evidence of RDPG p-values                                  |
-| S1             | `ani_figure_S1.ipynb`                                            | ANI depending on species representation distances                                          |
-| S5             | `jaccard_and_rdpg_clusters_confusion_matrix_figure_S5.ipynb`     | Confusion matrix of Jaccard vs RDPG clusters         |
-| S6             | `k_value_exploration_figure_S6.ipynb`                            | Exploration of the results with various values of neighboors |
+| Figure(s)      | Notebook                                                        | Description                                       | Required pipelines (prerequisite) |
+|----------------|------------------------------------------------------------------|----------------------------------------------------|------------------------------------|
+| 1              | `taxonomic_tree_figure_1.ipynb`                                  | Taxonomic tree of DNA sequences species                                      | None — uses `Data/Sequences/` only |
+| 2              | `pca_projection_figure_2.ipynb`                                  | PCA projection of the representations                                     | None — uses `Data/Embeddings/` only |
+| 3, 5, S4       | `methods_distance_matrice_figures_3_and_5_and_S4.ipynb`           | Distance matrices for the representation methods                   | RDPG (§3) + Jaccard (§4) |
+| 4, S2          | `jaccard_heatmaps_figures_4_and_S2.ipynb`                         | Heatmaps showing Jaccard distance heatmaps                           | Jaccard (§4) |
+| 6, S3          | `evidence_heatmaps_figures_6_and_S3.ipynb`                        | Heatmaps showing evidence of RDPG p-values                                  | RDPG (§3) |
+| S1             | `ani_figure_S1.ipynb`                                            | ANI depending on species representation distances                                          | None — uses `Data/ANI/` only |
+| S5             | `jaccard_and_rdpg_clusters_confusion_matrix_figure_S5.ipynb`     | Confusion matrix of Jaccard vs RDPG clusters         | Jaccard (§4) + RDPG (§3) + **run `jaccard_heatmaps_figures_4_and_S2.ipynb` and `evidence_heatmaps_figures_6_and_S3.ipynb` first** (reads `jaccard_clusters.csv`, `evidence_clusters.csv`) |
+| S6             | `k_value_exploration_figure_S6.ipynb`                            | Exploration of the results with various values of neighboors | Jaccard (§4) + **RDPG re-run (§3) with k = 5, 10, 40, 55, 70** in addition to 25 |
 
 </details>
 
