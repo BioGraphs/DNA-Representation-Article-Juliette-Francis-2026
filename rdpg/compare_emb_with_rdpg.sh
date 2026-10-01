@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # RDPG hyperparameters
-K=25
+K=${1:-25}   # first positional argument; defaults to 25
 N_BOOSTRAPS=999
 D=0
 DIST=euclidean

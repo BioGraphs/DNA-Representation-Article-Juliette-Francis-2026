@@ -1,6 +1,10 @@
 # DNA Representation Article
 
-Code to reproduce the results presented in "Graph-based comparison reveals distinct representation spaces across genomic foundation models":
+**TL;DR** — Reproducible code for "Graph-based comparison reveals distinct
+representation spaces across genomic foundation models". Two pipelines compare
+DNA representations (Jaccard, RDPG); three conda envs. Quick start: Docker
+(`docker build` + `docker run`) → run the Jaccard and RDPG comparisons →
+then `plots/` notebooks.
 
 
 ---
@@ -152,7 +156,19 @@ conda activate rdpg
 ./rdpg/compare_emb_with_rdpg.sh
 ```
 
-Be aware that `compare_emb_with_rdpg.sh` runs the RDPG framework for only one value of k (25), but the results needed for the Figure S6 involve running the script with other values (5, 10, 40, 55, 70). In order to be able to run the `k_value_exploration_figure_S6.ipynb` notebook, you will need to run one k value at a time by changing the value of `K` at the line 4 in `compare_emb_with_rdpg.sh`.
+Be aware that `compare_emb_with_rdpg.sh` runs the RDPG framework for only one value of k (25 by default), but the results needed for the Figure S6 involve running the script with other values (5, 10, 40, 55, 70). The script takes the value of `K` as its first positional argument (defaults to 25), so to be able to run the `k_value_exploration_figure_S6.ipynb` notebook you need to run it once per k value (5, 10, 40, 55, 70). For the standard comparison, just run it with the default:
+
+```bash
+./rdpg/compare_emb_with_rdpg.sh        # k=25 (default)
+```
+
+For figure S6, run one k value at a time, for example:
+
+```bash
+./rdpg/compare_emb_with_rdpg.sh 5      # k=5
+```
+
+and repeat for the other values (10, 40, 55, 70).
 
 
 ## 4. Launch the comparison of the DNA representations with the Jaccard distance metric
