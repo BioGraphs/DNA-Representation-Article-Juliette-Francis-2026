@@ -13,7 +13,7 @@ pip install -r ./representation_methods/DNABERT-S/requirements.txt
 pip uninstall triton
 ```
 
-## 3. Create the embedding
+## 2. Create the embedding
 
 Open a terminal in the `dna_representation_article` directory and run the following command lines. It might take some time if you don't have a GPU (~1 hour).
 ```bash
