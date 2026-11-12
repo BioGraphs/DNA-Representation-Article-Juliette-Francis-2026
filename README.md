@@ -1,11 +1,5 @@
 # DNA Representation Article
 
-TODO: add what files are created at each steps
-
-TODO: add l'implémentation suit les idées principales de cet article avec des choix en ajustant à notre cas de figures (eg knn ou symmetric p-value, memory light)
-
-TODO: GPU et temps de chaque étape
-
 **TL;DR** — Reproducible code for "Graph-based comparison reveals distinct
 representation spaces across genomic foundation models". Two pipelines compare
 DNA representations (Jaccard, RDPG); three conda envs. Quick start: Docker
